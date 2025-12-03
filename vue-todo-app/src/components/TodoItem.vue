@@ -17,7 +17,7 @@
 
     <v-list-item-action>
       <v-btn icon @click="fav">
-        <v-icon v-if="local.isFavorite">mdi-star</v-icon>
+        <v-icon v-if="getCurrentTodo().isFavorite">mdi-star</v-icon>
         <v-icon v-else>mdi-star-outline</v-icon>
       </v-btn>
       <v-btn icon @click="remove">
@@ -35,8 +35,6 @@ import { formatDistanceToNow } from 'date-fns'
 
 const props = defineProps({ todo: Object })
 const todos = useTodosStore()
-
-// local copy so editing doesn't immediately mutate the store until blur/save
 const local = reactive({ ...props.todo })
 
 watch(() => props.todo, (v) => {
@@ -51,9 +49,12 @@ function fav() {
   todos.toggleFavorite(local.id)
 }
 
+function getCurrentTodo() {
+  return todos.todos.find(t => t.id === local.id) || local
+}
+
 function save() {
   if (!local.title.trim()) {
-    // do not allow empty title; remove instead
     todos.removeTodo(local.id)
     return
   }

@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from 'uuid'
 const STORAGE_KEY = 'vue_auth_todos_v1'
 
 export const useTodosStore = defineStore('todos', () => {
-  const todos = ref([]) // original array
-  const filter = ref('all') // all, active, completed, favorites
-  const sort = ref('newest') // newest, oldest, az, za, favoritesFirst
+  const todos = ref([]) 
+  const filter = ref('all') 
+  const sort = ref('newest') 
 
   function loadFromLocalStorage() {
     const raw = localStorage.getItem(STORAGE_KEY)
@@ -24,8 +24,7 @@ export const useTodosStore = defineStore('todos', () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos.value))
   }
 
-  // save on any change
-  watch(todos, saveToLocalStorage, { deep: true })
+ watch(todos, saveToLocalStorage, { deep: true })
 
   function addTodo(title) {
     todos.value.unshift({

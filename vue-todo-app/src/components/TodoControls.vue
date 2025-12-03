@@ -1,15 +1,15 @@
 <template>
-  <!-- <div class="mb-4">
+  <div class="mb-2">
     <v-row>
       <v-col>
-        <v-text-field v-model="newTodo" label="Add todo" @keyup.enter="add" dense outlined />
+        <v-text-field v-model="newTodo"  class="container" label="Add todo" @keyup.enter="add" dense outlined />
       </v-col>
       <v-col cols="auto">
         <v-btn @click="add" :disabled="!newTodo">Add</v-btn>
       </v-col>
     </v-row>
 
-    <v-row class="mt-2" align="center">
+    <v-row class="mt-1" align="center">
       <v-col cols="12" md="6">
         <v-btn-toggle v-model="todos.filter" mandatory>
           <v-btn value="all">All</v-btn>
@@ -21,15 +21,18 @@
 
       <v-col cols="12" md="6">
         <v-select
-          v-model="todos.sort"
+          :model-value="todos.sort"
+          @update:model-value="todos.sort = $event"
           :items="sortOptions"
+          item-title="label"
+          item-value="value"
           label="Sort"
           dense
           outlined
         />
       </v-col>
     </v-row>
-  </div> -->
+  </div>
 </template>
 
 <script setup>
@@ -52,3 +55,10 @@ function add() {
   newTodo.value = ''
 }
 </script>
+
+<style scoped>
+.container{
+  max-width:1100px;
+  margin-top: 100px;
+}
+</style>

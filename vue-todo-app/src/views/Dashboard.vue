@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="6" class="mx-auto">
+      <v-col cols="12" md="119" class="mx-auto">
         <v-card>
           <v-card-title>
             Todo Dashboard
