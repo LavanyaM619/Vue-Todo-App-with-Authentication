@@ -9,12 +9,9 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { useCookies } from '@vueuse/integrations/useCookies'
 
 const auth = useAuthStore()
-const cookies = useCookies()
-
 function handleLogout() {
-  auth.logout(cookies)
+  auth.logout()
 }
 </script>

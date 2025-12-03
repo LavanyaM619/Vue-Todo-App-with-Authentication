@@ -35,13 +35,12 @@
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useTodosStore } from '@/stores/todos'
-import { useCookies } from '@vueuse/integrations/useCookies'
 
 const auth = useAuthStore()
 const todos = useTodosStore()
-const cookies = useCookies()
 
-const username = ref('') // optional: prefill with test user for convenience
+
+const username = ref('') 
 const password = ref('')
 const valid = ref(false)
 const formRef = ref(null)
@@ -49,11 +48,9 @@ const formRef = ref(null)
 async function submit() {
   if (!formRef.value?.validate?.()) return
   try {
-    await auth.login({ username: username.value, password: password.value }, cookies)
-    // load todos from localStorage now user is logged in
+    await auth.login({ username: username.value, password: password.value })
     todos.loadFromLocalStorage()
   } catch (err) {
-    // error is handled in store; nothing extra needed
   }
 }
 </script>
