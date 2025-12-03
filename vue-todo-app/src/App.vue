@@ -10,14 +10,12 @@
 import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useTodosStore } from '@/stores/todos'
-import { useCookies } from '@vueuse/integrations/useCookies'
 
 const auth = useAuthStore()
 const todos = useTodosStore()
-const cookies = useCookies()
 
 onMounted(() => {
-  auth.initFromCookie(cookies)
+  auth.initFromLocalStorage()
   if (auth.token) {
     todos.loadFromLocalStorage()
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4">
+  <!-- <div class="mb-4">
     <v-row>
       <v-col>
         <v-text-field v-model="newTodo" label="Add todo" @keyup.enter="add" dense outlined />
@@ -29,7 +29,7 @@
         />
       </v-col>
     </v-row>
-  </div>
+  </div> -->
 </template>
 
 <script setup>

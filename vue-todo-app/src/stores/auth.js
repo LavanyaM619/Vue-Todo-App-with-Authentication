@@ -8,12 +8,12 @@ export const useAuthStore = defineStore('auth', () => {
   const loading = ref(false)
   const error = ref(null)
 
-  function initFromCookie($cookies) {
-    const t = $cookies.get('accessToken')
+  function initFromLocalStorage() {
+    const t = localStorage.getItem('accessToken')
     if (t) token.value = t
   }
 
-  async function login({ username, password }, $cookies) {
+  async function login({ username, password }) {
     loading.value = true
     error.value = null
     try {
@@ -24,8 +24,8 @@ export const useAuthStore = defineStore('auth', () => {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message || 'Login failed')
-      // save token in cookie
-      $cookies.set('accessToken', data.accessToken, '7d')
+      // save token in localStorage
+      localStorage.setItem('accessToken', data.accessToken)
       token.value = data.accessToken
       user.value = {
         id: data.id,
@@ -43,12 +43,12 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function logout($cookies) {
-    $cookies.remove('accessToken')
+  function logout() {
+    localStorage.removeItem('accessToken')
     token.value = null
     user.value = null
     router.push({ name: 'Login' })
   }
 
-  return { token, user, loading, error, initFromCookie, login, logout }
+  return { token, user, loading, error, initFromLocalStorage, login, logout }
 })
